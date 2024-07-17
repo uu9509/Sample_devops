@@ -1,0 +1,12 @@
+sudo yum update -y
+sudo yum install -y wget
+wget https://releases.hashicorp.com/terraform/1.9.2/terraform_1.9.2_linux_amd64.zip
+sudo yum install -y unzip
+unzip terraform_1.9.2_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+terraform --version
+Set Up Terraform: (optional)
+mkdir terraform-projects
+cd terraform-projects
+terraform init
+terraform apply
