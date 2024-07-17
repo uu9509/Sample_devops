@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Function to check the length of a string
+function string_length() {
+    local str="$1"
+    echo "The length of '$str' is ${#str}"
+}
+
+# Function to check if a string is a palindrome
+function is_palindrome() {
+    local str="$1"
+    local reversed_str=$(echo "$str" | rev)
+    if [[ "$str" == "$reversed_str" ]]; then
+        echo "'$str' is a palindrome"
+    else
+        echo "'$str' is not a palindrome"
+    fi
+}
+
+# Function to perform basic operations on two numbers
+function number_operations() {
+    local num1=$1
+    local num2=$2
+    echo "Addition: $((num1 + num2))"
+    echo "Subtraction: $((num1 - num2))"
+    echo "Multiplication: $((num1 * num2))"
+    echo "Division: $((num1 / num2))"
+}
+
+# Function to reverse a string
+function reverse_string() {
+    local str="$1"
+    local reversed_str=$(echo "$str" | rev)
+    echo "The reverse of '$str' is '$reversed_str'"
+}
+
+# Main script
+echo "Enter a string:"
+read input_string
+
+echo "Enter two numbers:"
+read num1 num2
+
+# String length
+string_length "$input_string"
+
+# Palindrome check
+is_palindrome "$input_string"
+
+# Reverse string
+reverse_string "$input_string"
+
+# Number operations
+number_operations $num1 $num2
