@@ -1,0 +1,88 @@
+Create a VPC
+A Virtual Private Cloud (VPC) is needed for setting up networking.
+Step-by-Step:
+1. Open the VPC Dashboard.
+2. Click on &quot;Create VPC.&quot;
+3. Choose &quot;VPC with a Single Public Subnet&quot; or customize as needed.
+4. Enter the VPC name, CIDR block (e.g., 10.0.0.0/16), and subnet details.
+5. Click &quot;Create VPC.&quot;
+3. Create Subnets
+Subnets divide your VPC&#39;s IP address range into smaller networks.
+Step-by-Step:
+1. Go to the VPC Dashboard.
+2. Select &quot;Subnets&quot; from the left-hand menu.
+3. Click &quot;Create Subnet.&quot;
+4. Select the VPC, enter a name, availability zone, and CIDR block (e.g., 10.0.1.0/24).
+5. Click &quot;Create Subnet.&quot;
+4. Create and Configure an Internet Gateway
+An Internet Gateway allows communication between your VPC and the internet.
+Step-by-Step:
+1. In the VPC Dashboard, select &quot;Internet Gateways.&quot;
+2. Click &quot;Create Internet Gateway.&quot;
+3. Enter a name and click &quot;Create.&quot;
+4. Attach the Internet Gateway to your VPC:
+o Select your Internet Gateway.
+o Click &quot;Actions&quot; &gt; &quot;Attach to VPC.&quot;
+o Choose your VPC and click &quot;Attach.&quot;
+
+5. Create Route Tables and Routes
+Route tables control the routing of network traffic.
+Step-by-Step:
+1. In the VPC Dashboard, select &quot;Route Tables.&quot;
+2. Click &quot;Create Route Table.&quot;
+3. Select the VPC, enter a name, and click &quot;Create.&quot;
+4. Add a route for internet traffic:
+o Select your route table.
+o Click &quot;Routes&quot; &gt; &quot;Edit routes.&quot;
+o Click &quot;Add route.&quot;
+o Destination: 0.0.0.0/0
+o Target: Select your Internet Gateway.
+o Click &quot;Save routes.&quot;
+5. Associate the route table with your subnets:
+o Select the route table.
+o Click &quot;Subnet Associations&quot; &gt; &quot;Edit subnet associations.&quot;
+o Select your subnets and click &quot;Save.&quot;
+
+6. Launch an EC2 Instance
+EC2 instances are virtual servers in the cloud.
+Step-by-Step:
+1. Open the EC2 Dashboard.
+2. Click &quot;Launch Instance.&quot;
+3. Choose an Amazon Machine Image (AMI).
+4. Choose an instance type.
+5. Configure instance details:
+o Network: Select your VPC.
+o Subnet: Select your subnet.
+o Auto-assign Public IP: Enable.
+6. Add storage and tags as needed.
+7. Configure security group:
+o Allow SSH (port 22) from your IP.
+8. Review and launch the instance.
+7. Configure Dynamic Hostname Resolution
+Amazon Route 53 provides scalable DNS web service.
+Step-by-Step:
+1. Open the Route 53 Dashboard.
+2. Click &quot;Create Hosted Zone.&quot;
+3. Enter the domain name and click &quot;Create.&quot;
+4. Create a record set:
+
+o Click &quot;Create Record Set.&quot;
+o Name: Enter a subdomain or leave blank for root domain.
+o Type: Select &quot;A - IPv4 address.&quot;
+o Alias: No.
+o Value: Enter the public IP of your EC2 instance.
+o Click &quot;Create.&quot;
+
+8. Update EC2 Instance with New Hostname
+Assign a hostname to your EC2 instance.
+Step-by-Step:
+
+2. Edit the hostname configuration
+sudo hostnamectl set-hostname new-hostname
+3. Edit /etc/hosts to map the new hostname to the local IP
+sudo nano /etc/hosts
+Add the following line:
+127.0.1.1 new-hostname
+4. Reboot the instance to apply changes
+  sudo reboot
+  iske baad band krke wapis connect kro
